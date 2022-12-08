@@ -1,0 +1,12 @@
+First usr inputs how many actions will be taken (n)
+next n input lines contain actions like:
+
+add_book - adds book to the library. Input in the form of tuple: ("add", "Pan Tadeusz", "Adam Mickiewicz", 2000)
+
+lend - the library lends book to the reader (only one edition per book, max 3 books)
+example input: ("lend", "Jakub Dzikowski", "Quo Vadis")
+
+return - returns book to the library 
+input example: ("return", "Jakub Dzikowski", "Quo
+Vadis") 
+
