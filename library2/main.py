@@ -16,7 +16,7 @@ class Library:
         else:
             return False
 
-    def lend(self, reader, title):
+    def borrow(self, reader, title):
         for element in self.readers_list:
             if reader in str(element):
                 if element.borrowed_count >= 3:
@@ -118,18 +118,18 @@ def main():
 
     for el in lista_inpt:
         x = eval(str(el))
-        if "dodaj" in str(x[0]):
+        if "add" in str(x[0]):
             title = x[1]
             autor = x[2]
             year = x[3]
             MyLib.add_book_edition(title, autor, year)
 
-        elif "wypozycz" in str(x[0]):
+        elif "borrow" in str(x[0]):
             reader = x[1]
             title = x[2]
-            MyLib.lend(reader, title)
+            MyLib.borrow(reader, title)
 
-        elif "oddaj" in str(x[0]):
+        elif "return" in str(x[0]):
             reader = x[1]
             title = x[2]
             MyLib.return_book(reader, title)
