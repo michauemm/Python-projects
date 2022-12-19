@@ -1,0 +1,71 @@
+#For downloading files from moodle.ue.poznan.pl 
+
+import time
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+import selenium.webdriver as webdriver
+from selenium.webdriver.common.action_chains import ActionChains
+
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option('prefs',{
+    "plugins.always_open_pdf_externally": True,
+    "download.prompt_for_download": False
+})
+service_obj = Service('C:\\Users\\ememi\\PycharmProjects\\kurs\\graph\\chromedriver.exe')
+driver = webdriver.Chrome(service=service_obj,options=options)
+s = driver.get('https://moodle.ue.poznan.pl/login/index.php')
+
+downloads = "C:/Users/ememi/Downloads"
+
+class Moodle:
+
+    def __init__(self):
+        pass
+
+    def log_in(self, username, password):
+        usr = driver.find_element("id", "username")
+        usr.send_keys(username)
+        pswd = driver.find_element("id", "password")
+        pswd.send_keys(password)
+        button_login = driver.find_element("id","loginbtn")
+        button_login.click()
+
+    def _go_to_course(self,kurs):
+        search_input = driver.find_element(By.XPATH,
+                                           "/html/body/div[4]/div/div[1]/div/div[2]/section/div/div[3]/div/form/div/input")
+        search_input.send_keys(kurs)
+        search_input.submit()
+        # # enter the course
+        search_input = driver.find_element(By.XPATH,
+                                           "/html/body/div[4]/div/div[1]/div[2]/div[1]/section/div/div[2]/div/div[1]/h3/a")
+        search_input.click()
+
+    def open_all_activities(self):
+        """Used to download all files from the course"""
+
+        activity_items = driver.find_elements(By.CLASS_NAME,"activityname")
+        for activity in activity_items:
+            ActionChains(driver) \
+                .key_down(Keys.CONTROL) \
+                .click(activity) \
+                .key_up(Keys.CONTROL) \
+                .perform()
+
+    def home_page(self):
+        driver.get("https://moodle.ue.poznan.pl/my/")
+        f1 = driver.find_elements(By.CLASS_NAME,"custom_course_menu_course")
+        print(f1)
+
+
+m1 = Moodle()
+m1.log_in("user","password")
+m1._go_to_course("PLACEHOLDER")
+m1.open_all_activities()
+time.sleep(10)
+driver.quit()
+
+
+
+
