@@ -13,11 +13,11 @@ options.add_experimental_option('prefs',{
     "plugins.always_open_pdf_externally": True,
     "download.prompt_for_download": False
 })
-service_obj = Service('C:\\Users\\ememi\\PycharmProjects\\kurs\\graph\\chromedriver.exe')
+service_obj = Service('INPUT CHROMEDRIVER PATH')
 driver = webdriver.Chrome(service=service_obj,options=options)
 s = driver.get('https://moodle.ue.poznan.pl/login/index.php')
 
-downloads = "C:/Users/ememi/Downloads"
+downloads = "INPUT YOUR DOWNLOADS PATH"
 
 class Moodle:
 
